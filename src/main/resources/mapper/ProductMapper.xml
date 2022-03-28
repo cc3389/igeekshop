@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cc3389.igeekshop.mapper.ProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cc3389.igeekshop.entity.Product">
+        <id column="product_id" property="productId" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+        <result column="price" property="price" />
+        <result column="store_id" property="storeId" />
+        <result column="surplus" property="surplus" />
+        <result column="category_id" property="categoryId" />
+        <result column="photo" property="photo" />
+    </resultMap>
+
+</mapper>

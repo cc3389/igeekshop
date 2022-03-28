@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>商家管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+    <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<style>
+    body{
+        background:url(/images/bg_body.gif) repeat;
+    }
+</style>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="jumbotron">
+                <a href="/">  <img src="/images/index.png" alt="logo" href="/"/></a>
+            </div>
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">商品管理</a>
+                </div>
+                <div class="collapse navbar-collapse bg-info" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/upload">上架商品</a>
+                        </li>
+<!--                        <li>-->
+<!--                            <a href="#">销售报告</a>-->
+<!--                        </li>-->
+                    </ul>
+<!--                    <form class="navbar-form navbar-left" role="search">-->
+<!--                        <div class="form-group">-->
+<!--                            <input type="text" class="form-control" placeholder="搜索商品"/>-->
+<!--                        </div> <button type="submit" class="btn btn-default">搜索</button>-->
+<!--                    </form>-->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a th:text="${session.user.userName}"></a></li>
+                        <li>
+                            <a href="/user/logout">退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <h3>
+                我的商品
+            </h3>
+            <div class="row clearfix">
+                <div class="col-md-6 column">
+                </div>
+                <div class="col-md-6 column">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#">Prev</a>
+                        </li>
+                        <li>
+                            <a href="#">1</a>
+                        </li>
+                        <li>
+                            <a href="#">2</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Next</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        商品
+                    </th>
+                    <th>
+                        价格
+                    </th>
+                    <th>
+                        库存
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        TB - Monthly
+                    </td>
+                    <td>
+                        01/04/2012
+                    </td>
+                    <td>
+                        Default
+                    </td>
+                    <td>
+                        <button class="btn btn-info" data-toggle="modal" data-target="#detail">修改</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#delete">删除</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="row clearfix">
+                <div class="col-md-6 column">
+                </div>
+                <div class="col-md-6 column">
+                    <ul class="pagination">
+                        <li><a>Prev</a></li>
+                        <li><a onclick="changePage(i)">1</a></li>
+                        <li>
+                            <a>2</a>
+                        </li>
+                        <li>
+                            <a>Next</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+        </div>
+        <div class="col-md-4 column">
+        </div>
+        <div class="col-md-4 column">
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+        </div>
+    </div>
+
+    <!-- 模态框（Modal）修改商品 -->
+    <div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="productDetail" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form role="form" method="post" action="/product/update">
+                    <div class="modal-header">
+                        <h4 class="modal-title form-group" id="myModalLabel">
+                            <label>商品名称</label>
+                            <input name="name"id="name" value="商品名"></h4>
+                            <input name="productId" id="productId" hidden>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="price">价格</label>
+                            <input name="price" id="price"value="12.00" min="0.1" placeholder="价格"step="0.01" type="number"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="stock">库存</label>
+                            <input name="surplus" id="stock"value="12.00" min="0" step="1" placeholder="库存" type="number"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc">商品描述</label>
+                            <textarea class="form-control"id="desc" name="description" rows="3">商品的描述</textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button submit" class="btn btn-primary">修改</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delProduct" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-danger">
+                    <div class="modal-header">
+                        <h4 class="modal-title form-group text-danger" id="myModalLabel">警告<h4/>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                            确认删除吗?
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="closeDel"data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-default"id="confirmDel">确认</button>
+                    </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="/bootstrap/js/bootstrap.js"></script>
+<script th:src="@{/js/manage.js}"></script>
+</body>
+</html>

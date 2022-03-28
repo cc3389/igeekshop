@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单已生成</title>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="jumbotron">
+                <h1>
+                    订单已生成
+                </h1>
+                <p>
+                    3秒后将为您跳转到首页...
+                </p>
+                <p>
+                    如果浏览器未跳转,点击这里手动<a href="/">跳转</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script>
+    function redirect(){
+        window.location = "/";
+    }
+    $(function(){
+        setTimeout('redirect()', 3000);
+    });
+</script>
+</body>
+</html>

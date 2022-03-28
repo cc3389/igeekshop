@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cc3389.igeekshop.mapper.AddressMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cc3389.igeekshop.entity.Address">
+        <id column="address_id" property="addressId" />
+        <result column="user_id" property="userId" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="area" property="area" />
+        <result column="detail" property="detail" />
+        <result column="name" property="name" />
+        <result column="mobile" property="mobile" />
+    </resultMap>
+
+</mapper>

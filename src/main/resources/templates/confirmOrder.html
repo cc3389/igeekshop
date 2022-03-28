@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8" />
+    <title>确认订单</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    <li>
+                        <a href="/shoppingCart/cart">购物车</a>
+                    </li>
+                    <li class="active">确认订单</li>
+                </ul>
+            </div>
+        </div>
+        <h3>确认收货地址</h3>
+        <hr />
+        <div>
+            <div id="manyAddress">
+                    <input type="hidden">
+<!--                <div class="row clearfix">-->
+<!--                    <div class="col-md-8 column">-->
+<!--                        <label class="radio-inline">-->
+<!--                            <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1"/>-->
+<!--                            <span>地址地址地址地址地址地址地址地址地址地址地址地址地址</span><span>(cc339)</span><span>1651531531</span>>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-4 column">-->
+<!--                        <button class="btn btn-info" data-toggle="modal" data-target="#editLocationModal">-->
+<!--                            修改-->
+<!--                        </button>-->
+<!--                        <button class="btn btn-danger col-md-offset-1">删除</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-4 column">
+                    <button class="btn" data-toggle="modal" data-target="#newLocationModal">
+                        使用新地址
+                    </button>
+                </div>
+            </div>
+        </div>
+        <h3>确认订单信息</h3>
+        <hr />
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <table class="table" id="productTable">
+                    <thead>
+                        <tr>
+                            <th>商品名</th>
+                            <th>单价</th>
+                            <th>数量</th>
+                            <th>小计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+<!--                        <tr>-->
+<!--                            <td>1</td>-->
+<!--                            <td>TB - Monthly</td>-->
+<!--                            <td>01/04/2012</td>-->
+<!--                            <td>Default</td>-->
+<!--                        </tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-8 column"></div>
+            <div class="col-md-4 column">
+                <span><b>实付款：￥</b></span><span id="totalPay"></span>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-8 column"></div>
+            <div class="col-md-4 column">
+                <span><b>寄送至：</b></span><span id="toAddress"></span>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-8 column"></div>
+            <div class="col-md-4 column">
+                <span><b>收货人：</b></span><span id="receiveName"></span>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-8 column"></div>
+            <div class="col-md-4 column">
+                <button type="button" class="btn btn-primary btn-lg">提交订单</button>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="editLocationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabal"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">修改地址</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4" style="color: red">编辑收货地址</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <form role="form" class="form-inline">
+                            <div class="form-group">
+                                <label class="sr-only" for="edit-province">省</label>
+                                <input type="text" class="form-control" id="edit-province" placeholder="省">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="edit-city">市</label>
+                                <input type="text" class="form-control" id="edit-city" placeholder="市">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="edit-area">区</label>
+                                <input type="text" class="form-control" id="edit-area" placeholder="区">
+                            </div>
+                        </form>
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="edit-detail">详细地址:</label>
+                                <textarea class="form-control" rows="3"id="edit-detail"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-name">收货人姓名:</label>
+                                <input type="text" id="edit-name" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-mobile">手机号码:</label>
+                                <input type="text" id="edit-mobile" class="form-control" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="edit-save" data-dismiss="modal" aria-hidden="true">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="newLocationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabal"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">添加地址</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4" style="color: red">新增收货地址</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <form role="form" class="form-inline">
+                            <div class="form-group">
+                                <label class="sr-only" for="add-province">省</label>
+                                <input type="text" class="form-control" id="add-province" placeholder="省">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="add-city">市</label>
+                                <input type="text" class="form-control" id="add-city" placeholder="市">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="add-area">区</label>
+                                <input type="text" class="form-control" id="add-area" placeholder="区">
+                            </div>
+                        </form>
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="add-detail">详细地址:</label>
+                                <textarea class="form-control" rows="3" id="add-detail"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-name">收货人姓名:</label>
+                                <input type="text" id="add-name" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="add-mobile">手机号码:</label>
+                                <input type="text" id="add-mobile" class="form-control" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="add-save" data-dismiss="modal" aria-hidden="true">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script th:src="@{'js/confirmOrder.js'}"></script>
+</body>
+
+</html>
